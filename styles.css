@@ -31,6 +31,7 @@
 
   --container-max:  1200px;
   --section-gap:    6rem;
+  --navbar-height:  88px;
 }
 
 /* ── 2. Reset & Base ─────────────────────────────────────── */
@@ -42,6 +43,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-height);
   font-size: 16px;
 }
 
@@ -228,27 +230,38 @@ p { margin-bottom: 1rem; }
 }
 
 .navbar {
+  --nav-text-size: 1.15rem;
+  --brand-text-scale: 1.45;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: var(--navbar-height);
   gap: 1.5rem;
 }
 
-/* Brand */
+/* Brand — minimal: logo + wordmark only */
 .brand {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   text-decoration: none;
 }
-.brand-logo {
-  height: 36px;
-  width: auto;
+
+.brand:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
+
+.brand-logo {
+  height: 76px;
+  width: auto;
+  display: block;
+}
+
 .brand-text {
   font-family: var(--font-main);
-  font-size: 1.2rem;
+  font-size: calc(var(--nav-text-size) * var(--brand-text-scale));
   font-weight: 900;
   color: var(--color-accent);
   letter-spacing: 0.05em;
@@ -263,8 +276,8 @@ p { margin-bottom: 1rem; }
 }
 
 .nav-link {
-  padding: 0.4rem 0.85rem;
-  font-size: 0.85rem;
+  padding: 0.55rem 1rem;
+  font-size: var(--nav-text-size);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -292,8 +305,8 @@ p { margin-bottom: 1rem; }
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
@@ -309,12 +322,16 @@ p { margin-bottom: 1rem; }
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    --nav-text-size: 1.3rem;
+    --brand-text-scale: 1.22;
+  }
   .menu-toggle {
     display: flex;
   }
   .nav-links {
     position: fixed;
-    inset: 64px 0 0 0;
+    inset: var(--navbar-height) 0 0 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -329,9 +346,6 @@ p { margin-bottom: 1rem; }
   .nav-links.open {
     transform: translateX(0);
   }
-  .nav-link {
-    font-size: 1.2rem;
-  }
 }
 
 /* ── 10. Hero Section ────────────────────────────────────── */
@@ -339,7 +353,7 @@ p { margin-bottom: 1rem; }
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-top: calc(64px + 3rem);
+  padding-top: calc(var(--navbar-height) + 3rem);
   padding-bottom: 3rem;
   overflow: hidden;
 }
@@ -418,20 +432,38 @@ p { margin-bottom: 1rem; }
   margin-top: 0.3rem;
 }
 
-/* Hero Visual */
+/* Hero Visual — linii discrete + „spotlight” în centru ca logo-ul BCD să citească pe negru */
 .hero-visual {
   position: relative;
   height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-inline: 0.5rem;
+}
+
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 72% at 50% 48%,
+    rgba(6, 10, 18, 0.94) 0%,
+    rgba(6, 10, 18, 0.55) 42%,
+    transparent 68%
+  );
 }
 
 .hero-logo {
   position: relative;
   z-index: 2;
-  max-width: 340px;
+  max-width: min(340px, 88vw);
+  width: 100%;
+  height: auto;
   will-change: transform;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.65));
 }
 
 .hero-lines {
@@ -440,28 +472,19 @@ p { margin-bottom: 1rem; }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0.35;
-  z-index: 1;
+  opacity: 0.16;
+  z-index: 0;
   will-change: transform;
 }
 
-.hero-date-art {
-  position: absolute;
-  bottom: -1rem;
-  right: -2rem;
-  max-width: 200px;
-  opacity: 0.8;
-  z-index: 3;
-}
-
 /* ── 11. Ce este BCD ─────────────────────────────────────── */
-#ce-este-bcd .content {
-  /* nothing extra needed — split-layout handles it */
+.ce-este-bcd-inner {
+  max-width: 42rem;
+  margin-inline: auto;
 }
 
-#ce-este-bcd .media img {
-  border-radius: var(--radius-card);
-  box-shadow: 0 0 60px rgba(31,77,151,0.2);
+.ce-este-bcd-inner p:last-of-type {
+  margin-bottom: 0;
 }
 
 /* ── 12. Parteneri ───────────────────────────────────────── */
@@ -712,9 +735,9 @@ p { margin-bottom: 1rem; }
 }
 
 .about-logo {
-  height: 60px;
+  height: 100px;
   width: auto;
-  opacity: 0.85;
+  display: block;
 }
 
 .about-media {
@@ -747,9 +770,9 @@ p { margin-bottom: 1rem; }
 }
 
 .footer-logo {
-  height: 40px;
+  height: 100px;
   width: auto;
-  opacity: 0.7;
+  display: block;
 }
 
 .social-links {
@@ -758,7 +781,10 @@ p { margin-bottom: 1rem; }
   list-style: none;
 }
 
-.social-links a {
+.social-links a.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -767,8 +793,15 @@ p { margin-bottom: 1rem; }
   transition: color var(--transition);
 }
 
-.social-links a:hover,
-.social-links a:focus-visible {
+.social-links .social-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  display: block;
+}
+
+.social-links a.social-link:hover,
+.social-links a.social-link:focus-visible {
   color: var(--color-accent);
   outline: none;
 }
