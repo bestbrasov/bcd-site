@@ -505,19 +505,69 @@ p { margin-bottom: 1rem; }
 }
 
 /* ── 11. Ce este BCD ─────────────────────────────────────── */
+#ce-este-bcd {
+  position: relative;
+}
+
+/* gradient de „estompare” spre secțiunea Parteneri */
+#ce-este-bcd::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 2;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 10, 18, 0) 0%,        /* fundal BCD (negru) */
+    rgba(6, 10, 18, 0.6) 40%,
+    rgba(13, 20, 36, 1) 100%      /* fundal Parteneri (albastru închis) */
+  );
+}
+#ce-este-bcd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(31, 77, 151, 0.35),
+    rgba(31, 77, 151, 0.15),
+    transparent 60%
+  );
+
+  filter: blur(70px);
+  opacity: 0.9;
+}
+.ce-este-bcd-inner p:last-of-type {
+  margin-bottom: 0;
+}
+#ce-este-bcd .container {
+  position: relative;
+  z-index: 2;
+}
 .ce-este-bcd-inner {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 4rem;
   align-items: center;
-  position: relative;
-  overflow: visible;
 }
 
-.ce-este-bcd-inner p:last-of-type {
-  margin-bottom: 0;
+/* text clar aliniat la stânga */
+.ce-este-bcd-inner .bcd-text {
+  text-align: left;
+  justify-self: start;
 }
 
+/* asigurăm aliniere corectă pe paragrafe */
+.ce-este-bcd-inner p {
+  text-align: left;
+}
 .ce-este-bcd-inner::before {
   content: "";
   position: absolute;
@@ -537,13 +587,13 @@ p { margin-bottom: 1rem; }
 .about-silhouette {
   position: absolute;
   right: -80px;
-  bottom: -120px;
+  bottom: -110px;
 
   z-index: 0;
   pointer-events: none;
 }
 .about-silhouette img {
-  width: 550px; 
+  width: 500px; 
   max-width: 100%;
   opacity: 0.9;
 
@@ -614,7 +664,6 @@ p { margin-bottom: 1rem; }
 .partners-grid img {
   max-height: 100px;
   width: auto;
-  filter: brightness(0) invert(1);
   opacity: 0.8;
   transition: all var(--transition);
 }
@@ -627,6 +676,65 @@ p { margin-bottom: 1rem; }
 .partners-grid a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 4px;
+}
+#parteneri {
+  position: relative;
+  overflow: hidden;
+}
+
+/* exact același tip de glow ca la BCD */
+#parteneri::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+
+  background:
+    radial-gradient(circle at 30% 40%, rgba(31,77,151,0.4), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(31,77,151,0.3), transparent 65%);
+
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* conținut peste fundal */
+#parteneri .container {
+  position: relative;
+  z-index: 2;
+}
+#ce-este-bcd {
+  position: relative;
+  background-color: var(--color-bg); /* negru */
+}
+
+#parteneri {
+  position: relative;
+  background-color: var(--color-surface); /* albastru închis */
+}
+
+/* estompare lină între ele */
+#ce-este-bcd::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 160px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 10, 18, 0) 0%,
+    rgba(6, 10, 18, 0.4) 40%,
+    rgba(13, 20, 36, 1) 100%
+  );
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+#parteneri {
+  position: relative;
+  overflow: visible;
 }
 
 /* ── 13. Program (Premium Glassmorphism & Neon Theme) ───────────────── */
@@ -1224,3 +1332,4 @@ p { margin-bottom: 1rem; }
   font-weight: 800;
   letter-spacing: 0.03em;
 }
+
