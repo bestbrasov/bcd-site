@@ -565,7 +565,7 @@ p {
       url('assets/graphics/lines-v3.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.45;
+    opacity: 0.2;
   }
 
   .hero {
@@ -716,7 +716,7 @@ p {
 
   .about-silhouette {
     position: absolute;
-    bottom: calc(-1 * var(--section-gap) - 2rem);
+    bottom: calc(-1 * var(--section-gap) - 0.25rem);
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
