@@ -16,7 +16,7 @@
 
   background-size: cover;
   background-position: center;
-  opacity: 0.2;
+  opacity: 0.65;
   z-index: 0;
 }
 
@@ -414,13 +414,13 @@ p {
     visibility: visible;
     transform: translateY(0);
   }
-  
+
   .nav-links li {
     width: 100%;
     display: flex;
     justify-content: center;
   }
-  
+
   .nav-link {
     font-size: 1.15rem;
     padding: 0.85rem 1.4rem;
@@ -572,24 +572,30 @@ p {
     padding-top: calc(var(--navbar-height) + 2rem);
     padding-bottom: 2rem;
   }
+
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1.5rem;
   }
+
   .hero-copy {
     align-items: center;
   }
+
   .hero-meta {
     justify-content: center;
   }
+
   .countdown {
     justify-content: center;
   }
+
   .hero-visual {
     height: auto;
     margin-top: 1rem;
   }
+
   .hero-logo {
     max-width: 240px;
     padding-bottom: 0px;
