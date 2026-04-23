@@ -516,47 +516,69 @@ p { margin-bottom: 1rem; }
 
 /* ── 12. Parteneri ───────────────────────────────────────── */
 .partners-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2.5rem;
   align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
+  justify-items: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
 }
 
-.partners-grid.featured-partner {
-  justify-content: flex-start;
+/* All partners aligned at same level */
+.partners-grid.featured-partner a {
+  transform: translateY(0px);
 }
 
 .partners-grid a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem 2rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--color-border);
+  padding: 2rem 2.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(31, 77, 151, 0.08) 100%
+  );
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-card);
-  transition: var(--transition);
+  transition: all var(--transition);
+  position: relative;
+  width: 100%;
+  min-height: 150px;
 }
 
 .partners-grid a:hover,
 .partners-grid a:focus-visible {
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(236,228,154,0.35);
-  transform: translateY(-3px);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08) 0%,
+    rgba(31, 77, 151, 0.14) 100%
+  );
+  border-color: rgba(236,228,154,0.5);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(236,228,154,0.15),
+    inset 0 1px 0 rgba(236,228,154,0.2);
   outline: none;
 }
 
 .partners-grid img {
-  max-height: 60px;
+  max-height: 100px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: 0.75;
-  transition: opacity var(--transition);
+  opacity: 0.8;
+  transition: all var(--transition);
 }
 
 .partners-grid a:hover img {
   opacity: 1;
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(236,228,154,0.4));
+}
+
+.partners-grid a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
 }
 
 /* ── 13. Program ─────────────────────────────────────────── */
@@ -746,9 +768,43 @@ p { margin-bottom: 1rem; }
 }
 
 /* ── 14. Locație ─────────────────────────────────────────── */
-#locatie .media img {
+#locatie .location-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#locatie .location-header .eyebrow {
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+#locatie .location-header h2 {
+  color: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+#locatie .location-map-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
   border-radius: var(--radius-card);
-  box-shadow: 0 0 60px rgba(31,77,151,0.2);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(31,77,151,0.3);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition);
+}
+
+#locatie .location-map-wrapper:hover {
+  box-shadow: 0 30px 80px rgba(31,77,151,0.4);
+  transform: translateY(-4px);
+}
+
+#locatie .location-map {
+  display: block;
+  border-radius: var(--radius-card);
+  transition: all var(--transition);
 }
 
 /* ── 15. Despre noi ──────────────────────────────────────── */
