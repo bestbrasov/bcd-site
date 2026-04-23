@@ -393,13 +393,13 @@ p {
     position: fixed;
     top: var(--navbar-height);
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0;
-    overflow-y: hidden;
+    overflow-y: auto;
     gap: 0.8rem;
     background: var(--color-bg);
     opacity: 0;
