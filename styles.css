@@ -558,7 +558,6 @@ p {
 
 @media (max-width: 900px) {
   .hero {
-    min-height: auto;
     padding-top: calc(var(--navbar-height) + 2rem);
     padding-bottom: 2rem;
   }
@@ -709,11 +708,12 @@ p {
     bottom: 0;
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: calc(-1 * var(--section-gap));
   }
 
   .about-silhouette img {
-    width: 250px;
+    width: 320px;
     height: auto;
   }
 }
