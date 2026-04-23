@@ -629,49 +629,85 @@ p { margin-bottom: 1rem; }
   outline-offset: 4px;
 }
 
-/* ── 13. Program ─────────────────────────────────────────── */
+/* ── 13. Program (Premium Glassmorphism & Neon Theme) ───────────────── */
 .program-wrapper {
   position: relative;
   margin-top: 4rem;
   padding-bottom: 4rem;
+  /* Variabile locale pentru tema dark/premium */
+  --theme-bg: #0B1221;         /* Albastru foarte închis */
+  --theme-gold: #D4AF37;       /* Auriu elegant */
+  --theme-gold-glow: rgba(212, 175, 55, 0.4);
+  --theme-neon: #3A86FF;       /* Albastru neon pentru workshop */
+  --theme-neon-glow: rgba(58, 134, 255, 0.3);
+  --text-main: #FFFFFF;
+  --text-muted: #A0ABC0;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 .brutalist-title {
-  font-size: clamp(3rem, 8vw, 6rem);
-  line-height: 0.85;
+  font-family: var(--font-main), sans-serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
   text-transform: uppercase;
-  -webkit-text-stroke: 1px var(--color-accent);
-  color: transparent;
-  margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  letter-spacing: 8px; /* Spațiere mai mare pentru un look tech/aerisit */
+  
+  /* Efectul de "fuzionare" cu fundalul */
+  color: transparent; 
+  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.5); /* Contur fin auriu, semi-transparent */
+  
+  /* Glow-ul este acum foarte difuz, ca o aură rece */
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+  
+  /* Un gradient subtil care îl face să dispară ușor spre bază */
+  background: linear-gradient(
+    to bottom, 
+    rgba(212, 175, 55, 0.8) 0%, 
+    rgba(212, 175, 55, 0.2) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  opacity: 0.6; /* Îl face să pară parte din fundal, nu deasupra lui */
+  transition: opacity 0.5s ease;
 }
 
-/* Linia vertebrală */
+/* Efect la hover: se aprinde subtil când treci cu mouse-ul în zonă */
+.program-wrapper:hover ~ .brutalist-title,
+.brutalist-title:hover {
+  opacity: 0.9;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+}
+
+/* Linia vertebrală - transformată într-un fascicul de lumină aurie */
 .program-spine {
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 100px;
+  width: 2px; /* Linie subțire și fină */
+  background: linear-gradient(to bottom, transparent, var(--theme-gold), var(--theme-gold), transparent);
+  box-shadow: 0 0 15px var(--theme-gold-glow);
   transform: translateX(-50%);
   z-index: 1;
-  opacity: 0.35;
-  pointer-events: none;
 }
 
+/* Ascundem imaginea veche de background a liniei, dacă nu o mai folosești */
 .program-spine img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  display: none; 
 }
 
 .program-events {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
   position: relative;
   z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .event-row {
@@ -682,53 +718,72 @@ p { margin-bottom: 1rem; }
 }
 
 .event-time {
-  font-family: var(--font-main);
+  font-family: var(--font-main), sans-serif;
   font-size: 1.8rem;
-  color: var(--color-accent);
+  color: var(--theme-gold);
   text-align: right;
   padding-right: 2rem;
   font-weight: 800;
-  text-shadow: 0 0 15px rgba(236, 228, 154, 0.3);
+  text-shadow: 0 0 15px var(--theme-gold-glow);
+  letter-spacing: 1px;
 }
 
+/* Punctele de pe timeline - Inele aurii/luminoase */
 .event-dot {
-  width: 14px;
-  height: 14px;
-  background: var(--color-accent);
+  width: 16px;
+  height: 16px;
+  background: var(--theme-bg);
+  border: 3px solid var(--theme-gold);
   border-radius: 50%;
   justify-self: center;
-  box-shadow: 0 0 15px var(--color-accent);
-  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 12px var(--theme-gold-glow), inset 0 0 5px var(--theme-gold-glow);
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .event-dot.accent {
-  background: #fff;
-  box-shadow: 0 0 20px #fff;
+  background: var(--theme-gold);
+  box-shadow: 0 0 20px var(--theme-gold);
 }
 
+/* Glassmorphism Cards */
 .event-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
   padding: 1.5rem 2rem;
   margin-left: 2rem;
   position: relative;
-  transition: transform var(--transition);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: var(--text-main);
 }
 
 .event-content:hover {
-  transform: translateX(10px) scale(1.02);
+  transform: translateY(-3px) translateX(5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .event-content h3 {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 .event-content p {
-  color: var(--color-muted);
+  color: var(--text-muted);
   font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 0;
 }
 
-/* Alternare asimetrică */
+/* Alternare asimetrică pe desktop */
 .event-row:nth-child(even) .event-time {
   grid-column: 3;
   text-align: left;
@@ -745,44 +800,57 @@ p { margin-bottom: 1rem; }
 }
 
 .event-row:nth-child(even) .event-content:hover {
-  transform: translateX(-10px) scale(1.02);
+  transform: translateY(-3px) translateX(-5px);
 }
 
-/* Highlight workshop */
+/* 🌟 Highlight Workshop (Neon Blue Edition) */
+.event-row.highlight .event-dot {
+  border-color: var(--theme-neon);
+  box-shadow: 0 0 15px var(--theme-neon-glow);
+}
+
 .event-row.highlight .event-content {
-  background: rgba(31, 77, 151, 0.15);
-  border: 2px solid var(--color-primary);
-  box-shadow: 0 0 30px rgba(31, 77, 151, 0.2);
+  background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid var(--theme-neon);
+  box-shadow: 0 0 25px var(--theme-neon-glow), inset 0 0 15px rgba(58, 134, 255, 0.05);
 }
 
+.event-row.highlight .event-content:hover {
+  box-shadow: 0 0 35px rgba(58, 134, 255, 0.4), inset 0 0 20px rgba(58, 134, 255, 0.1);
+  border-color: #6EB2FF;
+}
+
+/* Grafica tip Val pentru Workshop */
 .event-label-img {
-  max-width: 200px;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 10px rgba(236, 228, 154, 0.5));
+  max-width: 120px;
+  margin-bottom: 1.2rem;
+  filter: drop-shadow(0 0 12px var(--theme-neon-glow));
+  opacity: 0.9;
 }
 
 .duration {
   display: inline-block;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: 0.75rem;
-  background: var(--color-primary);
-  padding: 2px 10px;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: var(--theme-gold);
+  font-weight: 600;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-/* Responsive program */
+/* Responsive program - Mobil */
 @media (max-width: 768px) {
   .event-row {
-    grid-template-columns: 50px 1fr;
-    gap: 1rem;
+    grid-template-columns: 30px 1fr;
+    gap: 1.5rem;
   }
 
   .program-spine {
-    left: 25px;
-    width: 40px;
+    left: 15px; /* Aliniat la centrul dot-ului */
   }
 
   .event-time {
@@ -790,12 +858,13 @@ p { margin-bottom: 1rem; }
     text-align: left;
     padding-left: 0;
     padding-right: 0;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
   }
 
   .event-dot {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 1 / span 2; /* Se întinde pe ambele rânduri (oră + card) */
     align-self: start;
     margin-top: 0.4rem;
   }
@@ -807,11 +876,18 @@ p { margin-bottom: 1rem; }
     text-align: left !important;
   }
 
-  /* anulează alternarea pe mobile */
+  /* Anulează alternarea pe mobile */
   .event-row:nth-child(even) .event-time { grid-column: 2; }
   .event-row:nth-child(even) .event-content {
     grid-column: 2;
     grid-row: unset;
+  }
+  
+  .event-row:nth-child(even) .event-content:hover {
+    transform: translateY(-3px) translateX(0);
+  }
+  .event-content:hover {
+    transform: translateY(-3px) translateX(0);
   }
 }
 
@@ -954,11 +1030,84 @@ p { margin-bottom: 1rem; }
   }
 }
 
-/* ── 15. Despre noi ──────────────────────────────────────── */
+/* ── 15. Despre noi (Optimized & Cleaned) ──────────────────── */
+
+#despre-noi {
+  position: relative;
+  overflow: hidden;
+}
+
 .about-inner {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Revenim la proporții egale */
+  gap: 10rem; /* Aici e secretul: am dublat distanța dintre text și poză (era 4rem) */
+  align-items: center;
 }
+
+.about-image {
+  display: flex;
+  justify-content: right; /* Ține poza lipită de marginea din dreapta */
+}
+
+.about-image img {
+  max-width: 100%; /* O facem un pic mai mică decât spațiul alocat */
+  width: 760px;   /* Am redus-o de la 760px ca să nu mai arate uriașă */
+  height: auto;
+  opacity: 0.95;
+  transform: translateY(30px);
+}
+/* ──── RESPONSIVE BREAKPOINT ────────────────── */
+@media (max-width: 768px) {
+  .about-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-image {
+    /* Correct alignment for centered content on mobile */
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}
+
+/* ──── DECORATIONS (Floating Dots) ───────────── */
+#despre-noi::before,
+#despre-noi::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatDots 8s ease-in-out infinite;
+}
+
+#despre-noi::before {
+  width: 220px;
+  height: 220px;
+  top: 40px;
+  left: -80px;
+  background: rgba(236, 228, 154, 0.18); /* Galben transparent */
+  filter: blur(2px);
+}
+
+#despre-noi::after {
+  width: 300px;
+  height: 300px;
+  bottom: -120px;
+  right: -100px;
+  background: rgba(236, 228, 154, 0.12);
+  filter: blur(4px);
+}
+
+@keyframes floatDots {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(15px); }
+  100% { transform: translateY(0px); }
+}
+
+
 .about-header {
   display: flex;
   align-items: flex-start;
@@ -987,68 +1136,7 @@ p { margin-bottom: 1rem; }
   border-radius: var(--radius-card);
   opacity: 0.85;
 }
-.about-inner {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 4rem;
-  align-items: center; /* deja bun, dar îl forțăm corect */
-}
-
-.about-image img {
-  width: 760px;
-  opacity: 0.95;
-  transform: translateY(10px);
-}
-@media (max-width: 768px) {
-  .about-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .about-image {
-    justify-content: center;
-    margin-top: 2rem;
-  }
-}
-#despre-noi {
-  position: relative;
-  overflow: hidden;
-}
-#despre-noi::before,
-#despre-noi::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(236, 228, 154, 0.18); /* galben transparent */
-  z-index: 0;
-  pointer-events: none;
-}
-#despre-noi::before {
-  width: 220px;
-  height: 220px;
-  top: 40px;
-  left: -80px;
-  filter: blur(2px);
-}
-#despre-noi::after {
-  width: 300px;
-  height: 300px;
-  bottom: -120px;
-  right: -100px;
-  background: rgba(236, 228, 154, 0.12);
-  filter: blur(4px);
-}
-
-@keyframes floatDots {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(15px); }
-  100% { transform: translateY(0px); }
-}
-
-#despre-noi::before,
-#despre-noi::after {
-  animation: floatDots 8s ease-in-out infinite;
-}
+───────────────────────────────────────────── */
 /* ── 16. Footer ──────────────────────────────────────────── */
 .site-footer {
   background: var(--color-surface);
