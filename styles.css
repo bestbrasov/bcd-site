@@ -396,12 +396,13 @@ p {
     right: 0;
     bottom: 0;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
-    background: rgba(6, 10, 18, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    overflow-y: auto;
+    gap: 1.5rem;
+    background: var(--color-bg);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
