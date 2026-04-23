@@ -415,6 +415,12 @@ p {
     transform: translateY(0);
   }
   
+  .nav-links li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
   .nav-link {
     font-size: 1.15rem;
     padding: 0.85rem 1.4rem;
