@@ -396,12 +396,11 @@ p {
     right: 0;
     bottom: 0;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    overflow-y: auto;
-    gap: 1.5rem;
+    padding: 0;
+    overflow-y: hidden;
+    gap: 0.8rem;
     background: var(--color-bg);
     opacity: 0;
     visibility: hidden;
@@ -417,8 +416,8 @@ p {
   }
   
   .nav-link {
-    font-size: 1.35rem;
-    padding: 1rem 2rem;
+    font-size: 1.15rem;
+    padding: 0.85rem 1.4rem;
     display: block;
     width: 90%;
     max-width: 300px;
