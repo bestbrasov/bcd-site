@@ -557,6 +557,17 @@ p {
 }
 
 @media (max-width: 900px) {
+  .hero::before {
+    background:
+      linear-gradient(to bottom,
+        rgba(6, 10, 18, 0.3),
+        rgba(6, 10, 18, 0.7)),
+      url('assets/graphics/home-bg-art.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.45;
+  }
+
   .hero {
     padding-top: calc(var(--navbar-height) + 2rem);
     padding-bottom: 2rem;
@@ -694,6 +705,7 @@ p {
   .ce-este-bcd-inner {
     grid-template-columns: 1fr;
     text-align: center;
+    padding-bottom: 360px;
   }
 
   .ce-este-bcd-inner .bcd-text,
@@ -703,17 +715,18 @@ p {
   }
 
   .about-silhouette {
-    position: relative;
-    right: 0;
-    bottom: 0;
+    position: absolute;
+    bottom: calc(-1 * var(--section-gap));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: calc(-1 * var(--section-gap));
+    margin: 0;
   }
 
   .about-silhouette img {
-    width: 320px;
+    width: 350px;
     height: auto;
   }
 }
