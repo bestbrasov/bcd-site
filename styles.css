@@ -843,7 +843,7 @@ p {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 3rem;
-  align-items: center;
+  align-items: stretch;
 }
 
 .freudenberg-image-wrapper {
@@ -855,7 +855,7 @@ p {
 
 .freudenberg-image-wrapper img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
   transition: transform 0.4s ease;
@@ -875,9 +875,8 @@ p {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  gap: 1.25rem;
+  margin-top: 2rem;
 }
 
 .stat-card {
