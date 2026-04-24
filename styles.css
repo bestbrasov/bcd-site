@@ -16,6 +16,8 @@
 
   background-size: cover;
   background-position: center;
+  transform: scale(1.05);
+  transform-origin: top center;
   opacity: 0.65;
   z-index: 0;
 }
@@ -23,6 +25,18 @@
 .hero>* {
   position: relative;
   z-index: 2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* ============================================================
@@ -272,6 +286,45 @@ p {
   opacity: 1;
   transform: none;
 }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
 
 /* ── 9. Header / Navbar ──────────────────────────────────── */
 .site-header {
@@ -537,10 +590,10 @@ p {
 .hero-logo {
   position: relative;
   z-index: 2;
-  max-width: min(460px, 88vw);
+  max-width: min(580px, 90vw);
   width: 100%;
   height: auto;
-  padding-bottom: 100px;
+  margin-top: 40px;
   will-change: transform;
   filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.65));
 }
@@ -737,6 +790,85 @@ p {
   }
 }
 
+/* ── Freudenberg Section ───────────────────────────────────── */
+.freudenberg-content {
+  margin-top: 2rem;
+}
+
+.freudenberg-intro-split {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.freudenberg-image-wrapper {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+}
+
+.freudenberg-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.freudenberg-image-wrapper:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .freudenberg-intro-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-card h3 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.quote-block {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 1.5rem;
+  margin-top: 2rem;
+}
+
+.quote-block p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.6;
+}
+
 /* ── 12. Parteneri ───────────────────────────────────────── */
 .partners-grid {
   display: grid;
@@ -784,14 +916,24 @@ p {
 
 .partners-grid img {
   max-height: 100px;
+  max-width: 100%;
+  object-fit: contain;
   width: auto;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: all var(--transition);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-.partners-grid a:hover img {
+.partners-grid a:hover img:not(.no-invert) {
   opacity: 1;
   filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(236, 228, 154, 0.4));
+}
+
+.partners-grid a:hover img.no-invert {
+  opacity: 1;
+  filter: drop-shadow(0 0 12px rgba(236, 228, 154, 0.4));
 }
 
 .partners-grid a:focus-visible {

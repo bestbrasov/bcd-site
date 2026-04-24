@@ -40,7 +40,7 @@ function updateCountdown() {
 }
 
 function setupScrollReveal() {
-  const revealItems = document.querySelectorAll(".fade-in, .reveal");
+  const revealItems = document.querySelectorAll(".fade-in, .reveal, .reveal-left, .reveal-right, .reveal-scale");
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
